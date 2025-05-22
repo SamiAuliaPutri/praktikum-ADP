@@ -1,69 +1,36 @@
-daftar_nim = []
-daftar_nama = []
-daftar_nilai = []
-
-while True:
-    print('''
-PROGRAM MANAJEMEN NILAI MAHASISWA
-
-1. Tambah Data
-2. Hapus Data
-3. Tampilkan Data
-4. Keluar
-''')
-
-    pilihan = input("Pilih opsi (1/2/3/4): ")
-
-    if pilihan == '1':
-        nim = input("Masukkan NIM Mahasiswa: ")
-        nama = input("Masukkan Nama Mahasiswa: ")
-        nilai = float(input("Masukkan Nilai Mahasiswa: "))
-        daftar_nim.append(nim)
-        daftar_nama.append(nama)
-        daftar_nilai.append(nilai)
-        print("Data berhasil ditambahkan.")
-        
-    elif pilihan == '2':
-        nim_hapus = input("Masukkan NIM Mahasiswa yang ingin dihapus: ")
-        for i in range(len(daftar_nim)):
-            if daftar_nim[i] == nim_hapus:
-                for j in range(i, len(daftar_nim) - 1):
-                    daftar_nim[j] = daftar_nim[j + 1]
-                    daftar_nama[j] = daftar_nama[j + 1]
-                    daftar_nilai[j] = daftar_nilai[j + 1]
-                daftar_nim.pop()
-                daftar_nama.pop()
-                daftar_nilai.pop()
-                print("Data berhasil dihapus.")
-                break
-        else:
-            print("Data tidak ditemukan")
-
-    elif pilihan == '3':
-        if len(daftar_nim) == 0:
-            print("Belum ada data mahasiswa.")
-        else:
-            # Urutkan dari nilai tertinggi
-            n = len(daftar_nilai)
-            for i in range(n):
-                for j in range(i + 1, n):
-                    if daftar_nilai[i] < daftar_nilai[j]:
-                        daftar_nim[i], daftar_nim[j] = daftar_nim[j], daftar_nim[i]
-                        daftar_nama[i], daftar_nama[j] = daftar_nama[j], daftar_nama[i]
-                        daftar_nilai[i], daftar_nilai[j] = daftar_nilai[j], daftar_nilai[i]
-
-            print("DATA MAHASISWA (DARI NILAI TERTINGGI):")
-            print("..............................................")
-            print("NIM       Nama               Nilai")
-            print("..............................................")
-            for i in range(len(daftar_nim)):
-                print(f"{daftar_nim[i]:<10}{daftar_nama[i]:<18}{daftar_nilai[i]}")
-            print("..............................................")
-
-    elif pilihan == '4':
-        print("Terima kasih telah menggunakan program ini.")
-        break
-
-    else:
-        print("Pilihan tidak valid. Silakan coba lagi.")
-
+import math
+print("=== Program Hitung Jarak Antar Titik ===")
+# Input jumlah titik
+print("Masukkan jumlah titik (minimal 2):")
+n = int(input())
+# Buat array 2 dimensi untuk simpan titik
+titik = []
+# Input koordinat tiap titik
+i = 0
+while i < n:
+    print("Titik ke-", i+1)
+    print("Masukkan koordinat x:")
+    x = float(input())
+    print("Masukkan koordinat y:")
+    y = float(input())
+    # Tambah ke array 2 dimensi
+    titik.append([x, y])
+    i = i + 1
+# Tampilkan semua titik
+print("\n--- Daftar Titik ---")
+i = 0
+while i < n:
+    print("O" + str(i+1) + " = (" + str(titik[i][0]) + ", " + str(titik[i][1]) + ")")
+    i = i + 1
+# Hitung jarak antar semua pasangan titik
+print("\n--- Jarak Antar Titik ---")
+i = 0
+while i < n:
+    j = i + 1
+    while j < n:
+        dx = titik[i][0] - titik[j][0]
+        dy = titik[i][1] - titik[j][1]
+        jarak = math.sqrt(dx*dx + dy*dy)
+        print("Jarak O" + str(i+1) + " ke O" + str(j+1) + " = %.2f" % jarak)
+        j = j + 1
+    i = i + 1
